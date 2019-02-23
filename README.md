@@ -12,4 +12,4 @@ IMDB Scrapper is Chromium application build using Python, Eel, VueJs, HTML, CSS,
 
 #### Buy me a coffee:
 
-[![Buy me a coffee](http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](http://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
+[![Buy me a coffee](https://raw.githubusercontent.com/umar13893/imdb-chromium-app-scrapper/master/coffee.png)](https://www.buymeacoff.ee/umartanveer)
