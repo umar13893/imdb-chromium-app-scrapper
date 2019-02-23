@@ -8,7 +8,7 @@ IMDB Scrapper is Chromium application build using Python, Eel, VueJs, HTML, CSS,
 
 ### How to run?
 
-After installing the all requirements you can simply run this application using "python main.py" command main.py is the main scripting file
+After installing all requirements this application can be run using "python main.py" command main.py is the main scripting file.
 
 ```python
 python main.py
