@@ -4,10 +4,10 @@ block_cipher = None
 
 
 a = Analysis(['main.py'],
-             pathex=['C:\\Users\\Umar\\Desktop\\IMDb_Application'],
+             pathex=['C:\\Users\\Umar\\Desktop\\imdb_git'],
              binaries=[],
              datas=[('C:\\Python32\\lib\\site-packages\\eel\\eel.js', 'eel'), ('web', 'web')],
-             hiddenimports=['bottle_websocket', 'settings'],
+             hiddenimports=['bottle_websocket'],
              hookspath=[],
              runtime_hooks=[],
              excludes=[],
