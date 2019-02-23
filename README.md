@@ -6,5 +6,6 @@ IMDB Scrapper is Chromium application build using Python, Eel, VueJs, HTML, CSS,
 3. BeautifulSoup (pip install beautifulsoup4)
 4. PyInstaller (pip install PyInstaller)
 
+####Screenshot:
 
 ![alt text](https://raw.githubusercontent.com/umar13893/imdb-chromium-app-scrapper/master/screenshot.png "IMDB Scrapper API")
