@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="./css/bootstrap-grid.min.css" />
+    <link rel="stylesheet" href="./css/vue-tabs.css">
+    <link href="./fonts/stylesheet.css" rel="stylesheet">
+    <link href="./css/magnific-popup.css" rel="stylesheet"/>
+    <link href="./css/style.css" rel="stylesheet"/>
+    <!-- development version, includes helpful console warnings -->
+    <script src="./js/jquery.js"></script>
+    <script src="./js/jquery.magnific-popup.min.js"></script>
+    <script src="./js/vue.js"></script>
+    <script src="./js/vue-tabs.js"></script>
+    <script src="./js/axios.min.js"></script>
+
+</head>
+<body>
+
+    <div id="app">
+        <div id="preloader" class="global_preloader" v-if="is_global_loading">
+            <div id="status" class="global_status"></div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <vue-tabs @tab-change="handleTabChange">
+                        <v-tab title="Movies">
+                            <div class="row select_field_row select_field_row_movies">
+                                <div class="col-md-6"></div>
+                                <div class="col-md-3">
+                                    <select v-if="movies_type == 'coming_soon' && is_show_date" class="select_field" @change="onMoviesDateChange()" name="date_movie" v-model="date_movie">
+                                        <option v-for="(date_movie_item,  index) in dates_movies_arr" :key="index" :value="date_movie_item">
+                                          {{ date_movie_item.text }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select v-if="is_show_movies_select" class="select_field" @change="onMoviesTypeChange()" v-model="movies_type">
+                                        <option value="coming_soon">Coming Soon</option>
+                                        <option value="popular">Popular</option>
+                                        <option value="top_rated">Top Rated</option>
+                                        <option value="top_rated_indians">Top Rated Indians</option>
+                                        <option value="in_theatre">In Theatre</option>
+                                        <option value="box_office">Box Office</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row load_inner_content_row">
+                                <div id="preloader" class="preloader_inner" v-if="is_loading_movies">
+                                    <div id="status" class="inner_loader"></div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div v-if="movies_type == 'coming_soon'">
+                                        <table class="movies_table" v-if="table_results.length != 0">
+                                            <thead>
+                                                <tr>
+                                                    <th v-for="heading in table_headings">
+                                                        {{ heading }}
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="result in table_results">
+                                                    <td>
+                                                        <img :src="result.poster_image" alt="" class="poster_image" />
+                                                    </td>
+                                                    <td>
+                                                        {{ result.movie_heading }}
+                                                    </td>
+                                                    <td>
+                                                        {{ result.movie_time }}
+                                                    </td>
+                                                    <td>
+                                                        {{ result.movie_types }}
+                                                    </td>
+                                                    <td>
+                                                        {{ result.description }}
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" @click.prevent="getMovieUrl(result.movie_href)" class="watch_video">
+                                                            Watch Video
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p class="not_found_coming_movies" v-else>
+                                            No coming soon movies are found!
+                                        </p>
+                                    </div>
+
+                                    <div v-if="movies_type == 'popular'">
+                                        <table class="movies_table" v-if="table_results.length != 0">
+                                            <thead>
+                                                <tr>
+                                                    <th v-for="heading in table_headings">
+                                                        {{ heading }}
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="result in table_results">
+                                                    <td>
+                                                        <img :src="result.movie_poster" alt="" class="poster_image small" />
+                                                    </td>
+                                                    <td>
+                                                        {{ result.movie_title }}
+                                                    </td>
+                                                    <td>
+                                                        {{ result.movie_rating }}
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" @click.prevent="getMovieUrl(result.movie_link)" class="watch_video">
+                                                            Watch Video
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p class="not_found_coming_movies" v-else>
+                                            No popular movies are found!
+                                        </p>
+                                    </div>
+
+                                    <div v-if="movies_type == 'top_rated'">
+                                        <table class="movies_table" v-if="table_results.length != 0">
+                                            <thead>
+                                                <tr>
+                                                    <th v-for="heading in table_headings">
+                                                        {{ heading }}
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="result in table_results">
+                                                    <td>
+                                                        <img :src="result.movie_poster" alt="" class="poster_image small" />
+                                                    </td>
+                                                    <td>
+                                                        {{ result.movie_title }}
+                                                    </td>
+                                                    <td>
+                                                        {{ result.movie_rating }}
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" @click.prevent="getMovieUrl(result.movie_link)" class="watch_video">
+                                                            Watch Video
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p class="not_found_coming_movies" v-else>
+                                            No top rated movies are found!
+                                        </p>
+                                    </div>
+
+                                    <div v-if="movies_type == 'top_rated_indians'">
+                                        <table class="movies_table" v-if="table_results.length != 0">
+                                            <thead>
+                                                <tr>
+                                                    <th v-for="heading in table_headings">
+                                                        {{ heading }}
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="result in table_results">
+                                                    <td>
+                                                        <img :src="result.movie_poster" alt="" class="poster_image small" />
+                                                    </td>
+                                                    <td>
+                                                        {{ result.movie_title }}
+                                                    </td>
+                                                    <td>
+                                                        {{ result.movie_rating }}
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" @click.prevent="getMovieUrl(result.movie_link)" class="watch_video">
+                                                            Watch Video
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p class="not_found_coming_movies" v-else>
+                                            No top rated indians movies are found!
+                                        </p>
+                                    </div>
+
+                                    <div v-if="movies_type == 'in_theatre'">
+                                        <table class="movies_table" v-if="table_results.length != 0">
+                                            <thead>
+                                                <tr>
+                                                    <th v-for="heading in table_headings">
+                                                        {{ heading }}
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="result in table_results">
+                                                    <td>
+                                                        <img :src="result.poster_image" alt="" class="poster_image" />
+                                                    </td>
+                                                    <td>
+                                                        {{ result.movie_heading }}
+                                                    </td>
+                                                    <td>
+                                                        {{ result.movie_time }}
+                                                    </td>
+                                                    <td>
+                                                        {{ result.movie_types }}
+                                                    </td>
+                                                    <td>
+                                                        {{ result.description }}
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" @click.prevent="getMovieUrl(result.movie_href)" class="watch_video">
+                                                            Watch Video
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p class="not_found_coming_movies" v-else>
+                                            No theatre movies are found!
+                                        </p>
+                                    </div>
+
+                                    <div v-if="movies_type == 'box_office'">
+                                        <table class="movies_table" v-if="table_results.length != 0">
+                                            <thead>
+                                                <tr>
+                                                    <th v-for="heading in table_headings">
+                                                        {{ heading }}
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="result in table_results">
+                                                    <td>
+                                                        <img :src="result.movie_poster" alt="" class="poster_image" />
+                                                    </td>
+                                                    <td>
+                                                        {{ result.movie_title }}
+                                                    </td>
+                                                    <td>
+                                                        {{ result.weekend }}
+                                                    </td>
+                                                    <td>
+                                                        {{ result.gross }}
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" @click.prevent="getMovieUrl(result.movie_link)" class="watch_video">
+                                                            Watch Video
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p class="not_found_coming_movies" v-else>
+                                            No box office movies are found!
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </v-tab>
+                        <v-tab title="Trailers">
+                            <div class="row trailer_select_row">
+                                <div class="col-md-9"></div>
+                                <div class="col-md-3">
+                                    <select v-if="is_show_trailer_select" class="select_field" @change="onTrailerTypeChange()" v-model="trailer_type">
+                                        <option value="popular">Popular</option>
+                                        <option value="most_recent">Most Recent</option>
+                                        <option value="tv_tonight">Tv Tonight</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row load_inner_content_row trailer_videos_row">
+                                <div id="preloader" class="preloader_inner" v-if="is_loading_movies">
+                                    <div id="status" class="inner_loader"></div>
+                                </div>
+                                <div class="col-md-12">
+
+                                    <div class="row" v-if="grid_data_response.length != 0">
+                                        <div class="col-md-2"  v-for="trailer in grid_data_response">
+                                    <div class="trailer_image_contain">
+                                        <div class="image_wrapper">
+                                            <img :src="trailer.trailer_image_src" :alt="trailer.caption_title" class="trailer_image"/>
+                                            <a href="#" @click.prevent="playDirectVideo(trailer.trailer_video_id)">
+                                                <img src="images/play_button.png" alt="" class="play_button"/>
+                                            </a>
+                                        </div>
+                                        <p class="trailer_name">
+                                            {{ trailer.caption_title }}
+                                        </p>
+                                    </div>
+                                </div>
+                                    </div>
+                                    <div class="row"  v-else>
+                                        <div class="col-md-12">
+                                            <p class="not_found_coming_movies">
+                                                No trailers are found!
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </v-tab>
+                        <v-tab title="Oscar Winners">
+                            <div class="row oscar_winner_rows load_inner_content_row">
+                                <div id="preloader" class="preloader_inner" v-if="is_loading_movies">
+                                    <div id="status" class="inner_loader"></div>
+                                </div>
+                                <div class="col-md-12">
+                                    <table class="movies_table" v-if="table_results.length != 0">
+                                        <thead>
+                                            <tr>
+                                                <th v-for="heading in table_headings">
+                                                    {{ heading }}
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="result in table_results">
+                                                <td>
+                                                    <img :src="result.link_image" alt="" class="poster_image" />
+                                                </td>
+                                                <td>
+                                                    {{ result.movie_title }}
+                                                </td>
+                                                <td>
+                                                    {{ result.movie_year }}
+                                                </td>
+                                                <td>
+                                                    {{ result.rating_value }}
+                                                </td>
+                                                <td>
+                                                    {{ result.desc_text }}
+                                                </td>
+                                                <td>
+                                                    <a href="#" @click.prevent="getMovieUrl(result.movie_link)" class="watch_video">
+                                                        Watch Video
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <p class="not_found_coming_movies" v-else>
+                                        No oscar winner movies are found!
+                                    </p>
+                                </div>
+                            </div>
+                        </v-tab>
+                    </vue-tabs>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="./js/main.js"></script>
+</body>
+</html>

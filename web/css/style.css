@@ -1,0 +1,209 @@
+body {
+    overflow-x: hidden;
+    background-color: #000;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+#app
+{
+    position: relative;
+}
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000000;
+    z-index: 3000;
+    /*display: none;*/
+}
+#status {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background-image:url(../images/loader.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: -100px 0 0 -100px;
+}
+.preloader_inner
+{
+    position: absolute !important;
+}
+.inner_loader
+{
+    top: 220px !important;
+}
+.active_g_loader
+{
+    display: block !important;
+}
+.load_inner_content_row
+{
+    position: relative;
+}
+.nav-tabs
+{
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    background-color: #141414;
+}
+.nav-tabs li
+{
+    display: table-cell !important;
+    text-align: center;
+    width: 33.33%;
+}
+.vue-tabs .nav-tabs > li > a
+{
+    background-color: #141414;
+    border-radius: 0;
+    border: none;
+    border-bottom: 4px solid transparent;
+    color: #ffffff;
+    padding: 18px 15px;
+    font-size: 23px;
+}
+.vue-tabs .nav-tabs > li > a:hover,
+.vue-tabs .nav-tabs > li > a:focus
+{
+    background-color: transparent;
+    border:none;
+    border-bottom: 4px solid #f40612;
+}
+.vue-tabs .nav-tabs
+{
+    border:none;
+    border-bottom: 3px solid #3d3d3d;
+}
+.vue-tabs .nav-tabs > li.active > a, .vue-tabs .nav-tabs > li.active > a:hover, .vue-tabs .nav-tabs > li.active > a:focus
+{
+    background-color: transparent;
+    color: #ffffff;
+    border:none;
+    border-bottom: 4px solid #f40612;
+}
+.select_field
+{
+    color: #ffffff;
+    background-color: #141414;
+    font-size: 17px;
+    border: none;
+    float: right;
+    padding: 10px;
+    width: 100%;
+    padding-left: 20px;
+    margin-top: 15px
+}
+.select_field_row_movies
+{
+    margin-top: 25px;
+}
+.movies_table
+{
+    border-spacing: 0;
+    margin-top: 22px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+.movies_table tr th
+{
+    color: #fff;
+    text-transform: uppercase;
+    padding: 30px 10px;
+    text-align: center;
+}
+.movies_table tr td
+{
+    color: #ccc;
+    padding: 10px 20px;
+    text-align: center;
+}
+.movies_table tr td a
+{
+    color:#fff;
+}
+.movies_table tr td a:hover
+{
+    text-decoration: underline;
+}
+.movies_table tr:nth-child(even)
+{
+    background-color: #222;
+}
+.poster_image
+{
+    height: 150px;
+    display: block;
+    margin: 0 auto;
+}
+.not_found_coming_movies
+{
+    color: #ccc;
+    text-align: center;
+    padding: 70px 0;
+}
+.poster_image.small
+{
+    height: 85px !important;
+}
+.oscar_winner_rows
+{
+    margin-top:25px;
+}
+.trailer_image_contain
+{
+    margin-bottom: 35px;
+}
+.trailer_image_contain .image_wrapper
+{
+    position: relative;
+}
+.trailer_image_contain .image_wrapper .play_button
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.trailer_image_contain .image_wrapper .trailer_image
+{
+    display: block;
+    margin: 0 auto;
+}
+.trailer_image_contain .trailer_name
+{
+    text-align: center;
+    color: #ffffff;
+}
+.trailer_videos_row
+{
+    margin-top: 42px;
+}
+.trailer_select_row
+{
+    margin-bottom: 38px;
+    margin-top: 25px;
+}
+.video-player-frame
+{
+    width: 100% !important;
+}
+.mfp-preloader
+{
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background-image:url(../images/loader.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: -100px 0 0 -100px;
+}
+
