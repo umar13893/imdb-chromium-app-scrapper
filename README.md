@@ -18,5 +18,3 @@ python main.py
 
 ![alt text](https://raw.githubusercontent.com/umar13893/imdb-chromium-app-scrapper/master/screenshot.png "IMDB Scrapper API")
 
-#### Buy me a coffee:
-
