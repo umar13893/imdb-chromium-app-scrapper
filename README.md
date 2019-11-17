@@ -20,4 +20,3 @@ python main.py
 
 #### Buy me a coffee:
 
-[![Buy me a coffee](https://raw.githubusercontent.com/umar13893/imdb-chromium-app-scrapper/master/coffee_image.png)](https://www.buymeacoff.ee/umartanveer)
